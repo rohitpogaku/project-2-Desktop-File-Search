@@ -1,12 +1,153 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Desktop Search Engine</title>
+    <meta charset="utf-8" />
+    <title>Desktop Search</title>
+    <link rel="icon" href="./desktop-search.png" type="image/icon type" />
+    <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
-    <h1>Desktop Search Engine</h1>
+  <body id="preview">
+    <h1 class="code-line" data-line-start="0" data-line-end="1">
+      DESKTOP SEARCH ENGINE
+    </h1>
+    <h2 class="code-line" data-line-start="0" data-line-end="1">
+      <a id="Introduction_0"></a>Introduction
+    </h2>
+    <p class="has-line-data" data-line-start="1" data-line-end="2">
+      One of the most frequently used and yet highly underrated features of
+      computers is search. Now be it the default search engine of windows or
+      spotlight on Mac, it never fails us to show the right result and we search
+      in a lot of wide variety of terms. Be it images, text, the content of the
+      file or file name, or file type, we have several filters and the
+      efficiency of search engines is becoming better and better each and every
+      day.
+    </p>
+    <p class="has-line-data" data-line-start="3" data-line-end="4">
+      Now let us look at the basic python implementation of how the desktop
+      search engine works. Of course, there will be much more complicated,
+      faster, and more well-designed versions of this on a larger scale which
+      are deployed in our windows and mac boxes. However, to get started with
+      the exploration of the search system, this project will be a beginning.
+    </p>
+    <hr />
+    <h2 class="code-line" data-line-start="6" data-line-end="7">
+      <a id="Scope_of_the_project_6"></a>Scope of the project
+    </h2>
+    <p class="has-line-data" data-line-start="7" data-line-end="8">
+      We will limit the search to these three things:
+    </p>
+    <ol>
+      <li class="has-line-data" data-line-start="8" data-line-end="9">
+        The content of the file
+      </li>
+      <li class="has-line-data" data-line-start="9" data-line-end="10">
+        The file name
+      </li>
+      <li class="has-line-data" data-line-start="10" data-line-end="12">
+        The file type - <em>pdf, docx, and txt</em>
+      </li>
+    </ol>
+    <p class="has-line-data" data-line-start="12" data-line-end="13">
+      We’ll limit it to text search only. Mainly, this will be a localized
+      search, meaning we are not going to search any term online for any of the
+      textual content.
+    </p>
+    <hr />
+    <blockquote>
+      <p class="has-line-data" data-line-start="15" data-line-end="16">
+        <strong>Note:</strong> There are advanced versions where you can search
+        for images, and text within images. There are even advanced versions of
+        the algorithm which is beyond the scope of this project.
+      </p>
+    </blockquote>
+    <hr />
+    <h2 class="code-line" data-line-start="18" data-line-end="19">
+      <a id="Building_Blocks_of_the_project_18"></a>Building Blocks of the
+      project
+    </h2>
+    <h4 class="code-line" data-line-start="19" data-line-end="20">
+      <a id="1_Search_type_19"></a>1. Search type
+    </h4>
+    <p class="has-line-data" data-line-start="20" data-line-end="21">
+      The search engine will be searched with one word <em>(unigram)</em>, two
+      words <em>(diagrams)</em>, and three words <em>(trigrams)</em>. We’ll
+      limit it to THREE words at most. We can also search based on
+      <em>file types</em>. It will list all files based on file extension.
+    </p>
+    <h4 class="code-line" data-line-start="22" data-line-end="23">
+      <a id="2_Preprocessing_22"></a>2. Preprocessing
+    </h4>
+    <p class="has-line-data" data-line-start="23" data-line-end="24">
+      Performs certain pre-processing techniques on the entire route directory
+      before implementing any of the search algorithms.
+    </p>
+    <dl>
+      <dt>Removing non-alpha characters</dt>
+      <dd>
+        will remove all special characters and numbers except alphabet
+        characters
+      </dd>
+      <dt>Removing stop words</dt>
+      <dd>
+        text words such as <em>the, is, at, which, and on</em>, all these are
+        commonly repeated words
+      </dd>
+      <dt>N-grams</dt>
+      <dd>the combination of 1 word, 2 words and 3 words</dd>
+    </dl>
+    <h4 class="code-line" data-line-start="34" data-line-end="35">
+      <a id="3_Database_Architecture_34"></a>3. Database Architecture
+    </h4>
+    <p class="has-line-data" data-line-start="35" data-line-end="36">
+      We will be creating three different tables:
+    </p>
+    <ul>
+      <li class="has-line-data" data-line-start="36" data-line-end="37">
+        Table for the file name, file type, and file path
+      </li>
+      <li class="has-line-data" data-line-start="37" data-line-end="38">
+        Table for words and file path: file path for every corresponding n-grams
+      </li>
+      <li class="has-line-data" data-line-start="38" data-line-end="40">
+        Table for file creation time, file name and file path
+      </li>
+    </ul>
+    <hr />
+    <h2 class="code-line" data-line-start="41" data-line-end="42">
+      <a id="Modules_41"></a>Modules
+    </h2>
+    <dl>
+      <dt><code>Main.py</code></dt>
+      <dd>
+        Creates DB_File and populates the database after the preprocessing is
+        done. Basically, <code>main.py</code> puts all pieces together
+      </dd>
+      <dt><code>DB_File.py</code></dt>
+      <dd>contains all three tables related to files and n-grams</dd>
+      <dt><code>Text_Extractor</code></dt>
+      <dd>preprocess the root folder</dd>
+      <dt><code>retrieval.py</code></dt>
+      <dd>this is where we run our project from after initial setup</dd>
+    </dl>
+    <hr />
+    <h2 class="code-line" data-line-start="41" data-line-end="42">
+      <a id="Modules_41"></a>Demo
+    </h2>
+    <video
+      class="demo"
+      style="
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        width: 100%;
+        height: auto;
+        padding-top: 2rem;
+        padding-bottom: 5rem;
+      "
+      src="./demo.mkv"
+      controls
+      muted
+    ></video>
+    <hr />
   </body>
 </html>
